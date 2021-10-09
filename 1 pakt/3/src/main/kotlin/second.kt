@@ -8,11 +8,13 @@ fun main(){
     var count = 0
     val one = 1
     var err = 0
+    var charCode = 0
+    val charConst = (127).toChar()
     var errTwoString = 0
     var exit = 0
     var countWords = 0//= one
-    val arr = Array(127) {0}
-    var arr1 = Array(127){-1}
+    val arr = Array(128) {0}
+    var arr1 = Array(128){-1}
     while (err==0) {
         if (count!=0) {
             string += newString + "\n"
@@ -27,18 +29,19 @@ fun main(){
     }
     if (string!= "" && errTwoString == 0) {
         for(firstChar in string){
-           val charCode = firstChar.code
-            if(firstChar == '\n' ) {
-                arr1 = Array(127){-1}
-                countWords +=one
-            }
-            else {
-                if(arr1[charCode] < 0){
-                    arr1[charCode] += one
-                    arr[charCode] += one
+            charCode = if (firstChar == '⌂') 127 else firstChar.code
+                if(firstChar == '\n' ) {
+                    arr1 = Array(128){-1}
+                    countWords +=one
                 }
-            }
+                else {
+                    if(arr1[charCode] < 0){
+                        arr1[charCode] += one
+                        arr[charCode] += one
+                    }
+                }
         }
+
         for (i in arr){
             if (i == countWords-2)
                 print("${exit.toChar()}")
