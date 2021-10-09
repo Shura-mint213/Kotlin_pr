@@ -10,7 +10,7 @@
 //ротких словах. Аналогичным образом передавайте в вашу функцию lambda,
 //которая будет определять условие отбора слов.
 
-fun searchFirstLetter(mainString:String,comparingNumbers:(Int)->Boolean,wordLength:(Int,Int)->Boolean):String{
+fun searchFirstLetter(mainString:String,comparingNumber:(Int)->Boolean,wordLength:(Int,Int)->Boolean):String{
     var firstCharInString = ' '
     var returnString = ""
     var charGeneral = ' '
@@ -18,13 +18,13 @@ fun searchFirstLetter(mainString:String,comparingNumbers:(Int)->Boolean,wordLeng
     var countGeneral = 0
     var flag = 0
     var flagString = true
-    for (charFirst in mainString) {
+    for (charFirst in mainString) {//ab angd
         if (countGeneral==0) {
             charGeneral = charFirst
         }
         if (charFirst == ' ') {           //ищем новое слово кратные заданые в lambda функции
-            if((comparingNumbers(countGeneral) && wordLength(countGeneral,countCharInString))
-                || (comparingNumbers(countGeneral) && flagString)) {
+            if((comparingNumber(countGeneral) && wordLength(countGeneral,countCharInString))
+                || (comparingNumber(countGeneral) && flagString)) {
                 countCharInString = countGeneral
                 firstCharInString = charGeneral
                 flagString = false
@@ -37,14 +37,14 @@ fun searchFirstLetter(mainString:String,comparingNumbers:(Int)->Boolean,wordLeng
         else countGeneral++
     }
     when {                     // проверка если последнее слово небыло проверено
-        !comparingNumbers(countGeneral) && firstCharInString != ' '-> returnString = "1.1 Max char = $firstCharInString"
-        comparingNumbers(countGeneral) && charGeneral != ' ' -> {
-            if (comparingNumbers(countGeneral) && wordLength(countGeneral,countCharInString)) {
+        !comparingNumber(countGeneral) && firstCharInString != ' '-> returnString = "1.1 Max char = $firstCharInString"
+        comparingNumber(countGeneral) && charGeneral != ' ' -> {
+            if (comparingNumber(countGeneral) && wordLength(countGeneral,countCharInString)) {
                 firstCharInString = charGeneral
             }
             returnString = "1.2 Max char = $firstCharInString"
         }
-        comparingNumbers(countGeneral) && charGeneral == ' ' -> returnString = "Одни пробелы("
+        comparingNumber(countGeneral) && charGeneral == ' ' -> returnString = "Одни пробелы("
         charGeneral == ' ' || firstCharInString == ' ' -> returnString = "Нет слов кратных 3("
     }
     return returnString

@@ -13,17 +13,18 @@ fun funVarargString(vararg stringArg: String):String{
     var stringReturn = ""
     val one = 1
     var exit = 0
+    var charCode = 0
     var countWords = 0//= one
-    val arr = Array(127) {0}
-    var arr1 = Array(127){-1}
+    val arr = Array(128) {0}
+    var arr1 = Array(128){-1}
     for (str in stringArg) {
         string += str + "\n"
     }
     if (string!= "") {
         for(firstChar in string){
-            val charCode = firstChar.code
+            charCode = if(firstChar == '⌂') 127 else firstChar.code
             if(firstChar == '\n' ) {
-                arr1 = Array(127){-1}
+                arr1 = Array(128){-1}
                 countWords +=one
             }
             else {
@@ -45,5 +46,5 @@ fun funVarargString(vararg stringArg: String):String{
 }
 
 fun main(){
-    println("str = ${funVarargString("xu","xu","xi","xi","ui","ui4")}")
+    println("str = ${funVarargString("xu","xu⌂","xi⌂","xi⌂","ui⌂","ui4")}")
 }
