@@ -3,7 +3,7 @@
 //T – любой тип.
 
 fun <T>func( n: Int, value:(T)->T):(T)->T{
-    return {x->
+    return { x->
         var result = x
         var count = 0
         while (count<n){
